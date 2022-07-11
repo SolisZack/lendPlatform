@@ -1,0 +1,10 @@
+server:
+  port: 8140 # 服务端口
+
+spring:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    virtual-host: /srbhost
+    username: testUser
+    password: 123456
