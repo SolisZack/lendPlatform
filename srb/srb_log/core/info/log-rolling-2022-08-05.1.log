@@ -1,0 +1,8 @@
+2022-08-05 00:05:13 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.LockTests Started LockTests in 6.371 seconds (JVM running for 7.202)
+2022-08-05 00:05:14 [INFO ] main RedisTemplateTests.java:36 com.atguigu.srb.core.RedisTemplateTests null if none
+2022-08-05 00:05:43 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.ServiceCoreApplication The following profiles are active: dev
+2022-08-05 00:05:50 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.ServiceCoreApplication Started ServiceCoreApplication in 7.298 seconds (JVM running for 7.837)
+2022-08-05 00:06:18 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.LockTests The following profiles are active: dev
+2022-08-05 00:06:24 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.LockTests Started LockTests in 6.371 seconds (JVM running for 7.147)
+2022-08-05 00:06:25 [INFO ] main RedisTemplateTests.java:36 com.atguigu.srb.core.RedisTemplateTests null if none
+2022-08-05 00:06:47 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.ServiceCoreApplication The following profiles are active: dev

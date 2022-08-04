@@ -1,0 +1,7 @@
+2022-08-04 22:53:28 [INFO ] http-nio-8210-exec-3 LendServiceImpl.java:145 com.atguigu.srb.core.service.impl.LendServiceImpl get lend from redis
+2022-08-04 22:53:28 [INFO ] http-nio-8210-exec-3 LendServiceImpl.java:161 com.atguigu.srb.core.service.impl.LendServiceImpl get investedNum from redis
+2022-08-04 23:02:50 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.ServiceCoreApplication The following profiles are active: dev
+2022-08-04 23:02:54 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.ServiceCoreApplication Started ServiceCoreApplication in 4.376 seconds (JVM running for 4.842)
+2022-08-04 23:03:36 [INFO ] http-nio-8210-exec-3 LendServiceImpl.java:145 com.atguigu.srb.core.service.impl.LendServiceImpl get lend from redis
+2022-08-04 23:03:36 [INFO ] http-nio-8210-exec-3 LendServiceImpl.java:161 com.atguigu.srb.core.service.impl.LendServiceImpl get investedNum from redis
+2022-08-04 23:03:55 [INFO ] http-nio-8210-exec-10 LendItemServiceImpl.java:80 com.atguigu.srb.core.service.impl.LendItemServiceImpl 生成投资单号:INVEST20220804230355609

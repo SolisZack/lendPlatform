@@ -1,0 +1,7 @@
+2022-08-05 00:00:01 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.ServiceCoreApplication The following profiles are active: dev
+2022-08-05 00:00:31 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.ServiceCoreApplication The following profiles are active: dev
+2022-08-05 00:03:55 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.ServiceCoreApplication The following profiles are active: dev
+2022-08-05 00:04:02 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.ServiceCoreApplication Started ServiceCoreApplication in 7.351 seconds (JVM running for 7.88)
+2022-08-05 00:04:47 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.ServiceCoreApplication The following profiles are active: dev
+2022-08-05 00:04:51 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.ServiceCoreApplication Started ServiceCoreApplication in 4.567 seconds (JVM running for 5.037)
+2022-08-05 00:05:08 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.LockTests The following profiles are active: dev

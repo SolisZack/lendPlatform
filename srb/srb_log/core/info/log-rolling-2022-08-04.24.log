@@ -1,0 +1,7 @@
+2022-08-04 22:43:27 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.RedisTemplateTests Started RedisTemplateTests in 11.168 seconds (JVM running for 12.173)
+2022-08-04 22:43:28 [INFO ] main RedisTemplateTests.java:36 com.atguigu.srb.core.RedisTemplateTests null if none
+2022-08-04 22:44:10 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.RedisTemplateTests The following profiles are active: dev
+2022-08-04 22:44:17 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.RedisTemplateTests Started RedisTemplateTests in 10.314 seconds (JVM running for 11.099)
+2022-08-04 22:48:07 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.ServiceCoreApplication The following profiles are active: dev
+2022-08-04 22:48:13 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.ServiceCoreApplication Started ServiceCoreApplication in 8.948 seconds (JVM running for 9.4)
+2022-08-04 22:49:00 [INFO ] http-nio-8210-exec-3 LendServiceImpl.java:145 com.atguigu.srb.core.service.impl.LendServiceImpl get lend from redis

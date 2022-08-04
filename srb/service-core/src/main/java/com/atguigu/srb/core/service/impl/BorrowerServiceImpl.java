@@ -179,6 +179,7 @@ public class BorrowerServiceImpl extends ServiceImpl<BorrowerMapper, Borrower> i
         // Check if duplicate
         QueryWrapper<UserIntegral> userIntegralQueryWrapper = new QueryWrapper<>();
         userIntegralQueryWrapper.eq("content", "借款人基本信息");
+        userIntegralQueryWrapper.eq("user_id", userId);
         if (userIntegralMapper.selectCount(userIntegralQueryWrapper) == 0) {
             integral += borrowerApprovalVO.getInfoIntegral();
             userIntegralMapper.insert(userIntegral);
@@ -192,6 +193,7 @@ public class BorrowerServiceImpl extends ServiceImpl<BorrowerMapper, Borrower> i
             // Check if duplicate
             userIntegralQueryWrapper = new QueryWrapper<>();
             userIntegralQueryWrapper.eq("content", IntegralEnum.BORROWER_IDCARD.getMsg());
+            userIntegralQueryWrapper.eq("user_id", userId);
             if (userIntegralMapper.selectCount(userIntegralQueryWrapper) == 0) {
                 integral += IntegralEnum.BORROWER_IDCARD.getIntegral();
                 userIntegralMapper.insert(userIntegral);
@@ -206,6 +208,7 @@ public class BorrowerServiceImpl extends ServiceImpl<BorrowerMapper, Borrower> i
             // Check if duplicate
             userIntegralQueryWrapper = new QueryWrapper<>();
             userIntegralQueryWrapper.eq("content", IntegralEnum.BORROWER_CAR.getMsg());
+            userIntegralQueryWrapper.eq("user_id", userId);
             if (userIntegralMapper.selectCount(userIntegralQueryWrapper) == 0) {
                 integral += IntegralEnum.BORROWER_CAR.getIntegral();
                 userIntegralMapper.insert(userIntegral);
@@ -220,6 +223,7 @@ public class BorrowerServiceImpl extends ServiceImpl<BorrowerMapper, Borrower> i
             // Check if duplicate
             userIntegralQueryWrapper = new QueryWrapper<>();
             userIntegralQueryWrapper.eq("content", IntegralEnum.BORROWER_HOUSE.getMsg());
+            userIntegralQueryWrapper.eq("user_id", userId);
             if (userIntegralMapper.selectCount(userIntegralQueryWrapper) == 0) {
                 integral += IntegralEnum.BORROWER_HOUSE.getIntegral();
                 userIntegralMapper.insert(userIntegral);

@@ -1,0 +1,7 @@
+2022-08-04 22:16:57 [INFO ] http-nio-8210-exec-2 RequestHelper.java:42 com.atguigu.srb.core.hfb.RequestHelper 加密后：4e4a0d52bd608fa440b755b60d2fd54e
+2022-08-04 22:29:38 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.ServiceCoreApplication The following profiles are active: dev
+2022-08-04 22:29:44 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.ServiceCoreApplication Started ServiceCoreApplication in 7.275 seconds (JVM running for 7.697)
+2022-08-04 22:30:34 [INFO ] http-nio-8210-exec-3 LendServiceImpl.java:145 com.atguigu.srb.core.service.impl.LendServiceImpl get lend from redis
+2022-08-04 22:30:34 [INFO ] http-nio-8210-exec-3 LendServiceImpl.java:161 com.atguigu.srb.core.service.impl.LendServiceImpl get investedNum from redis
+2022-08-04 22:35:07 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.ServiceCoreApplication The following profiles are active: dev
+2022-08-04 22:35:14 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.ServiceCoreApplication Started ServiceCoreApplication in 9.822 seconds (JVM running for 10.305)

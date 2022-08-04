@@ -1,9 +1,11 @@
 package com.atguigu.srb.core.pojo.vo;
 
 import io.swagger.annotations.ApiModel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 @ApiModel(description = "投标信息")
 public class InvestVO {
 

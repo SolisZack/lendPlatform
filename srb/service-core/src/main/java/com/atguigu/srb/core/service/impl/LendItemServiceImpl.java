@@ -17,9 +17,11 @@ import com.atguigu.srb.core.pojo.entity.LendItem;
 import com.atguigu.srb.core.pojo.vo.InvestVO;
 import com.atguigu.srb.core.service.*;
 import com.atguigu.srb.core.util.LendNoUtils;
+import com.atguigu.srb.core.util.RedisUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +31,8 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -63,13 +67,45 @@ public class LendItemServiceImpl extends ServiceImpl<LendItemMapper, LendItem> i
     @Resource
     private UserAccountService userAccountService;
 
+    @Resource
+    RedisTemplate<String, Object> redisTemplate;
+
+    @Resource
+    RedisUtils redisUtils;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public String commitInvest(InvestVO investVO) {
         String lendItemNo = LendNoUtils.getLendItemNo();
         log.info("生成投资单号:{}", lendItemNo);
-        Lend lend = lendMapper.selectById(investVO.getLendId());
+
+        // 基于clientId加锁
+        String clientId = UUID.randomUUID().toString();
+
+        // 获取标的信息
+        Lend lend = (Lend) redisTemplate.opsForValue().get("srb:core:lend:" + investVO.getLendId());
+        if (lend == null) {
+            lend = lendMapper.selectById(investVO.getLendId());
+            boolean lendSetSuccess = redisUtils.threadSafeSetValue(clientId,
+                    "srb:core:lend:" + investVO.getLendId(), lend,
+                    1, TimeUnit.DAYS, "lend");
+            if (!lendSetSuccess)
+                throw new BusinessException("无法将标的投资信息添加至redis");
+        }
+
+        // 获取标的已投资金额
+        String lendNo = lend.getLendNo();
+        BigDecimal investedNum = (BigDecimal) redisTemplate.opsForValue().get("srb:core:lendInvest:" + lendNo);
+        // 缓存到redis里
+        if (investedNum == null) {
+            investedNum = lend.getInvestAmount();
+            boolean lendInvestSuccess = redisUtils.threadSafeSetValue(clientId,
+                    "srb:core:lendInvest:" + lendNo, investedNum,
+                    1, TimeUnit.DAYS, "lendInvest");
+            // 如果无法缓存抛出异常
+            if (!lendInvestSuccess)
+                throw new BusinessException("无法将标的投资金额添加至redis");
+        }
 
         // 检查标的状态
         Assert.isTrue(
@@ -77,7 +113,7 @@ public class LendItemServiceImpl extends ServiceImpl<LendItemMapper, LendItem> i
                 ResponseEnum.LEND_INVEST_ERROR
         );
         // 检查是否超卖
-        BigDecimal investSum = lend.getInvestAmount().add(new BigDecimal(investVO.getInvestAmount()));
+        BigDecimal investSum = investedNum.add(new BigDecimal(investVO.getInvestAmount()));
         Assert.isTrue(
                 investSum.doubleValue() <= lend.getAmount().doubleValue(),
                 ResponseEnum.LEND_FULL_SCALE_ERROR
@@ -88,6 +124,16 @@ public class LendItemServiceImpl extends ServiceImpl<LendItemMapper, LendItem> i
                 investerAccount.doubleValue() >= Double.parseDouble(investVO.getInvestAmount()),
                 ResponseEnum.LEND_FULL_SCALE_ERROR
         );
+
+        // redis中已投资金额增加
+        log.info("Before:redis中已投资金额增加");
+        boolean lendInvestIncSuccess = redisUtils.threadSafeAddNum(clientId,
+                "srb:core:lendInvest:" + lendNo, new BigDecimal(investVO.getInvestAmount()), lend.getAmount(),
+                1, TimeUnit.DAYS, "lendInvest");
+        // 如果无法缓存抛出异常
+        if (!lendInvestIncSuccess)
+            throw new BusinessException("无法在redis中修改标的已投资金额");
+        log.info("After:redis中已投资金额增加");
 
         // 组装表单
         String investBindeCode = userBindService.getBindCodeByUserId(investVO.getInvestUserId());
@@ -136,6 +182,7 @@ public class LendItemServiceImpl extends ServiceImpl<LendItemMapper, LendItem> i
         lendItemMapper.insert(lendItem);
 
         return FormHelper.buildForm(HfbConst.INVEST_URL, param);
+//        return "";
     }
 
     @Override
@@ -181,7 +228,54 @@ public class LendItemServiceImpl extends ServiceImpl<LendItemMapper, LendItem> i
         transFlowService.saveTransFlow(transFlowBO);
 
         return "success";
+    }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public String failureNotify(Map<String, Object> paramMap) {
+        //通过val,给锁设置唯一id，防止其他线程删除锁
+        String clientId = UUID.randomUUID().toString();  //或者雪花生成位置ID
+
+        String agentBillNo = (String) paramMap.get("agentBillNo");
+        String lendNo = (String) paramMap.get("agentProjectCode");
+        String voteAmt = (String) paramMap.get("voteAmt");
+        String expectAmount = (String) paramMap.get("projectAmt");
+
+        // 幂等性返回
+        Object notified = redisTemplate.opsForValue().get("srb:core:lendItemFailureNotify:" + agentBillNo);
+        if (notified != null)
+            return "success";
+
+        // 抢锁
+        boolean getLock = redisUtils.getLock(clientId, "lendItemFailureNotifyLock");
+        if (!getLock)
+            return "false";
+
+        // 基于分布式锁回滚标的已投资金额
+        boolean opsSuccess  = redisUtils.threadSafeAddNum(clientId,
+                "srb:core:lendInvest:" + lendNo, new BigDecimal("-" + voteAmt), new BigDecimal(expectAmount),
+                1, TimeUnit.HOURS, "lendInvestLock");
+
+        // 拿不到锁则说明存在问题
+        if (!opsSuccess) {
+            log.error("向Redis中减少标的已投资金额失败");
+            return "false";
+        }
+
+        // 防止重复卖, 幂等
+        redisUtils.threadSafeSetValue(clientId,
+                "srb:core:lendItemFailureNotify:" + agentBillNo, true,
+                1, TimeUnit.DAYS, "lendItemFailureNotify");
+
+        // 释放锁
+        redisUtils.releaseLock("lendItemFailureNotifyLock", clientId);
+
+        // 删除投资记录lendItem
+        QueryWrapper<LendItem> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("lend_item_no", agentBillNo);
+        lendItemMapper.delete(queryWrapper);
+
+        return "success";
     }
 
     @Override

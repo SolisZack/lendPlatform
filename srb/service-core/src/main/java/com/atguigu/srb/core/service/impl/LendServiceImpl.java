@@ -20,6 +20,7 @@ import com.atguigu.srb.core.util.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +30,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -72,6 +74,12 @@ public class LendServiceImpl extends ServiceImpl<LendMapper, Lend> implements Le
 
     @Resource
     private LendItemService lendItemService;
+
+    @Resource
+    RedisTemplate<String, Object> redisTemplate;
+
+    @Resource
+    RedisUtils redisUtils;
 
     @Override
     public void createLend(BorrowInfoApprovalVO borrowInfoApprovalVO, BorrowInfo borrowInfo) {
@@ -128,7 +136,41 @@ public class LendServiceImpl extends ServiceImpl<LendMapper, Lend> implements Le
     @Override
     public Map<String, Object> getLendDetail(Long id) {
         Map<String, Object> result = new HashMap<>();
-        Lend lend = lendMapper.selectById(id);
+        // 基于clientId加redis锁
+        String clientId = UUID.randomUUID().toString();
+
+        // 从redis获取标的信息
+        Lend lend = (Lend) redisTemplate.opsForValue().get("srb:core:lend:" + id);
+        if (lend != null) {
+            log.info("get lend from redis");
+        }
+        // 如果redis没有则从mysql复制到redis中
+        if (lend == null) {
+            lend = lendMapper.selectById(id);
+            boolean lendSetSuccess = redisUtils.threadSafeSetValue(clientId,
+                    "srb:core:lend:" + id, lend,
+                    1, TimeUnit.DAYS, "lend");
+            if (!lendSetSuccess)
+                throw new BusinessException("无法将标的投资信息添加至redis");
+        }
+
+        // 从redis获取标的已投资金额
+        String lendNo = lend.getLendNo();
+        BigDecimal investedAmount = (BigDecimal) redisTemplate.opsForValue().get("srb:core:lendInvest:" + lendNo);
+        if (investedAmount != null) {
+            log.info("get investedNum from redis");
+        }
+        // 如果redis没有则从mysql并复制到redis中
+        if (investedAmount == null) {
+            investedAmount = lend.getInvestAmount();
+            boolean lendInvestSuccess = redisUtils.threadSafeSetValue(clientId,
+                    "srb:core:lendInvest:" + lendNo, investedAmount,
+                    1, TimeUnit.DAYS, "lendInvest");
+            // 如果无法缓存抛出异常
+            if (!lendInvestSuccess)
+                throw new BusinessException("无法将标的投资金额添加至redis");
+        }
+        lend.setInvestAmount(investedAmount);
 
         // Get lend info
         lend.getParam().put("returnMethod", dictService.getNameByParentDictCodeAndValue(

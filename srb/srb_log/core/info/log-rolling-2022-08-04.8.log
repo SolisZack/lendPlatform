@@ -1,0 +1,6 @@
+2022-08-04 20:09:10 [INFO ] http-nio-8210-exec-4 RequestHelper.java:40 com.atguigu.srb.core.hfb.RequestHelper 加密前：999888|9|12421421421421|武汉银行|420104124242141|15827654212|http://localhost/api/core/userBind/notify|王美丽|http://localhost:3000/user|1659614950373|9876543210
+2022-08-04 20:09:10 [INFO ] http-nio-8210-exec-4 RequestHelper.java:42 com.atguigu.srb.core.hfb.RequestHelper 加密后：5975210f4fa95fabe14658cdcdf25991
+2022-08-04 20:27:34 [INFO ] http-nio-8210-exec-9 RequestHelper.java:40 com.atguigu.srb.core.hfb.RequestHelper 加密前：999888|9|121351531531531|汉口银行|420103199851221|15827654212|http://localhost/api/core/userBind/notify|王美丽|http://localhost:3000/user|1659616054052|9876543210
+2022-08-04 20:27:34 [INFO ] http-nio-8210-exec-9 RequestHelper.java:42 com.atguigu.srb.core.hfb.RequestHelper 加密后：6716842b1222f34562df2b732568d58d
+2022-08-04 20:27:48 [INFO ] http-nio-8210-exec-1 UserBindController.java:55 com.atguigu.srb.core.controller.api.UserBindController Get paramMap from hfb:{"agentUserId":"9","resultCode":"0001","sign":"5e0cd05650a094ec4a83679553dac140","bindCode":"ec51f254c0fa4bc29da628396d1ce1a2","resultMsg":"成功","timestamp":"1659616067034"}
+2022-08-04 20:27:48 [INFO ] http-nio-8210-exec-1 RequestHelper.java:40 com.atguigu.srb.core.hfb.RequestHelper 加密前：9|ec51f254c0fa4bc29da628396d1ce1a2|0001|成功|1659616067034|9876543210

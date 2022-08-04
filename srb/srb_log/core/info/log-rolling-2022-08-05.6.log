@@ -1,0 +1,6 @@
+2022-08-05 00:47:51 [INFO ] http-nio-8110-exec-7 LendItemServiceImpl.java:75 com.atguigu.srb.core.service.impl.LendItemServiceImpl 生成投资单号:INVEST20220805004751660
+2022-08-05 00:47:51 [INFO ] http-nio-8110-exec-7 RedisUtils.java:56 com.atguigu.srb.core.util.RedisUtils 将srb:core:lendInvest:LEND20220804205749908设置为3000.00
+2022-08-05 00:47:51 [INFO ] http-nio-8110-exec-7 LendItemServiceImpl.java:124 com.atguigu.srb.core.service.impl.LendItemServiceImpl Before:redis中已投资金额增加
+2022-08-05 00:47:51 [INFO ] http-nio-8110-exec-7 RedisUtils.java:95 com.atguigu.srb.core.util.RedisUtils 将srb:core:lendInvest:LEND20220804205749908从3000.00修改至3010.00
+2022-08-05 00:47:51 [INFO ] http-nio-8110-exec-7 LendItemServiceImpl.java:131 com.atguigu.srb.core.service.impl.LendItemServiceImpl After:redis中已投资金额增加
+2022-08-05 00:59:35 [INFO ] http-nio-8110-exec-1 LendItemServiceImpl.java:75 com.atguigu.srb.core.service.impl.LendItemServiceImpl 生成投资单号:INVEST20220805005935702

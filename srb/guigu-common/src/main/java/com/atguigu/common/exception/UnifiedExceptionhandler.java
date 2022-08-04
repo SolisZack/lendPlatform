@@ -61,7 +61,8 @@ public class UnifiedExceptionhandler {
             ServletRequestBindingException.class,
             ConversionNotSupportedException.class,
             MissingServletRequestPartException.class,
-            AsyncRequestTimeoutException.class
+            AsyncRequestTimeoutException.class,
+            InterruptedException.class
     })
     public R handleServletException(Exception e) {
         log.error(e.getMessage(), e);

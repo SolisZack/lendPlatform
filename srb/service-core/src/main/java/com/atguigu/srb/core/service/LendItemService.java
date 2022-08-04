@@ -21,7 +21,10 @@ public interface LendItemService extends IService<LendItem> {
 
     String notify(Map<String, Object> paramMap);
 
+    String failureNotify(Map<String, Object> paramMap);
+
     List<LendItem> selectByLendId(Long lendId);
 
     List<LendItem> selectAllByLendId(Long lendId);
+
 }

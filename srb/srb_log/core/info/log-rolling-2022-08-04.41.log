@@ -1,0 +1,6 @@
+2022-08-04 23:17:55 [INFO ] http-nio-8210-exec-8 LendItemServiceImpl.java:80 com.atguigu.srb.core.service.impl.LendItemServiceImpl 生成投资单号:INVEST20220804231755281
+2022-08-04 23:17:55 [INFO ] http-nio-8210-exec-8 LendItemServiceImpl.java:129 com.atguigu.srb.core.service.impl.LendItemServiceImpl Before:redis中已投资金额增加
+2022-08-04 23:17:55 [INFO ] http-nio-8210-exec-8 RedisUtils.java:95 com.atguigu.srb.core.util.RedisUtils 将srb:core:lendInvest:LEND20220804205749908从3000.00修改至4000.00
+2022-08-04 23:17:55 [INFO ] http-nio-8210-exec-8 LendItemServiceImpl.java:136 com.atguigu.srb.core.service.impl.LendItemServiceImpl After:redis中已投资金额增加
+2022-08-04 23:17:55 [INFO ] http-nio-8210-exec-8 RequestHelper.java:40 com.atguigu.srb.core.hfb.RequestHelper 加密前：INVEST20220804231755281|999888|LEND20220804205749908|王美丽装修|ec51f254c0fa4bc29da628396d1ce1a2|testMotherFucker|http://localhost/api/core/lendItem/notify|30000.00|http://localhost:3000/user|1659626275178|1000|2a278d814e854135bb8164ec2c12f2b8|0|0|9876543210
+2022-08-04 23:17:55 [INFO ] http-nio-8210-exec-8 RequestHelper.java:42 com.atguigu.srb.core.hfb.RequestHelper 加密后：6730e6e19b306dc877363cbe4cccf2dd

@@ -58,8 +58,8 @@ public class LendItemController {
             if ("0001".equals(paramMap.get("resultCode")))
                 return lendItemService.notify(paramMap);
             else {
-                log.info("会员投资回调失败");
-                return "false";
+                log.info("会员投资交易失败");
+                return lendItemService.failureNotify(paramMap);
             }
         }else {
             log.info("会员投资回调回调签名错误");

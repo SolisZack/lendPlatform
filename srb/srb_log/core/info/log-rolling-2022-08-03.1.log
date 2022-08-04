@@ -1,0 +1,9 @@
+2022-08-03 17:59:41 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.LockTests Started LockTests in 7.472 seconds (JVM running for 8.294)
+2022-08-03 17:59:42 [INFO ] main LockTests.java:25 com.atguigu.srb.core.LockTests id:7
+2022-08-03 18:00:09 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.LockTests The following profiles are active: dev
+2022-08-03 18:00:15 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.LockTests Started LockTests in 6.764 seconds (JVM running for 7.579)
+2022-08-03 18:02:15 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.LockTests The following profiles are active: dev
+2022-08-03 18:02:22 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.LockTests Started LockTests in 7.716 seconds (JVM running for 8.552)
+2022-08-03 18:03:29 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.LockTests The following profiles are active: dev
+2022-08-03 18:03:35 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.LockTests Started LockTests in 6.583 seconds (JVM running for 7.412)
+2022-08-03 18:06:59 [INFO ] main SpringApplication.java:655 com.atguigu.srb.core.LockTests The following profiles are active: dev

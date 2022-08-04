@@ -1,0 +1,15 @@
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-7 DictServiceImpl.java:55 com.atguigu.srb.core.service.impl.DictServiceImpl Querying dict data from redis
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-5 DictServiceImpl.java:55 com.atguigu.srb.core.service.impl.DictServiceImpl Querying dict data from redis
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-8 DictServiceImpl.java:55 com.atguigu.srb.core.service.impl.DictServiceImpl Querying dict data from redis
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-2 DictServiceImpl.java:55 com.atguigu.srb.core.service.impl.DictServiceImpl Querying dict data from redis
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-6 DictServiceImpl.java:55 com.atguigu.srb.core.service.impl.DictServiceImpl Querying dict data from redis
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-5 DictServiceImpl.java:64 com.atguigu.srb.core.service.impl.DictServiceImpl Querying dict data from mysql
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-6 DictServiceImpl.java:64 com.atguigu.srb.core.service.impl.DictServiceImpl Querying dict data from mysql
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-7 DictServiceImpl.java:64 com.atguigu.srb.core.service.impl.DictServiceImpl Querying dict data from mysql
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-8 DictServiceImpl.java:64 com.atguigu.srb.core.service.impl.DictServiceImpl Querying dict data from mysql
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-2 DictServiceImpl.java:64 com.atguigu.srb.core.service.impl.DictServiceImpl Querying dict data from mysql
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-7 DictServiceImpl.java:74 com.atguigu.srb.core.service.impl.DictServiceImpl Saving dict data to redis
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-8 DictServiceImpl.java:74 com.atguigu.srb.core.service.impl.DictServiceImpl Saving dict data to redis
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-6 DictServiceImpl.java:74 com.atguigu.srb.core.service.impl.DictServiceImpl Saving dict data to redis
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-2 DictServiceImpl.java:74 com.atguigu.srb.core.service.impl.DictServiceImpl Saving dict data to redis
+2022-08-04 20:30:56 [INFO ] http-nio-8210-exec-5 DictServiceImpl.java:74 com.atguigu.srb.core.service.impl.DictServiceImpl Saving dict data to redis

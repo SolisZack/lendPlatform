@@ -1,0 +1,6 @@
+2022-08-04 22:15:44 [INFO ] main StartupInfoLogger.java:61 com.atguigu.srb.core.ServiceCoreApplication Started ServiceCoreApplication in 5.291 seconds (JVM running for 5.765)
+2022-08-04 22:16:49 [INFO ] http-nio-8210-exec-5 LendServiceImpl.java:145 com.atguigu.srb.core.service.impl.LendServiceImpl get lend from redis
+2022-08-04 22:16:49 [INFO ] http-nio-8210-exec-5 LendServiceImpl.java:161 com.atguigu.srb.core.service.impl.LendServiceImpl get investedNum from redis
+2022-08-04 22:16:57 [INFO ] http-nio-8210-exec-2 LendItemServiceImpl.java:80 com.atguigu.srb.core.service.impl.LendItemServiceImpl 生成投资单号:INVEST20220804221657314
+2022-08-04 22:16:57 [INFO ] http-nio-8210-exec-2 RedisUtils.java:76 com.atguigu.srb.core.util.RedisUtils redis中不存在key: srb:core:lendInvest:LEND20220804205749908
+2022-08-04 22:16:57 [INFO ] http-nio-8210-exec-2 RequestHelper.java:40 com.atguigu.srb.core.hfb.RequestHelper 加密前：INVEST20220804221657314|999888|LEND20220804205749908|王美丽装修|ec51f254c0fa4bc29da628396d1ce1a2|testMotherFucker|http://localhost/api/core/lendItem/notify|30000.00|http://localhost:3000/user|1659622617104|3000|2a278d814e854135bb8164ec2c12f2b8|0|0|9876543210
